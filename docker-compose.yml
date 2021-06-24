@@ -1,17 +1,15 @@
-version: '3.8'
+version: '3.7'
 services:
 
   composer:
     image: composer
     volumes:
-      - .:/mezzio-doctrine
-    working_dir: /mezzio-doctrine
+      - .:/app
+    working_dir: /app
     command: composer install
 
   php:
-    build:
-      context: .
-      dockerfile: container-build/php/Dockerfile
+    build: ./container-build/php
     ports:
       - "9000:9000"
     command: php -S 0.0.0.0:9000 -t public/
